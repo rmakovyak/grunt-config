@@ -2,6 +2,7 @@
 var LIVERELOAD_PORT = 35730;
 var SERVER_PORT = 9000;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+// var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
@@ -51,12 +52,20 @@ module.exports = function (grunt) {
                 // change this to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
             },
+            // proxies: [
+            //     {
+            //         context: '/ext_api',
+            //         host: '54.236.222.7',                    
+            //         changeOrigin: true
+            //     }
+            // ],
             livereload: {
                 options: {
                     middleware: function (connect) {
                         return [
-                            lrSnippet,                            
+                            lrSnippet,                         
                             mountFolder(connect, '')
+                            // proxySnippet
                         ];
                     }
                 }
@@ -76,7 +85,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('serve', function (target) {
         grunt.task.run([         
-            'connect:livereload',            
+            'connect:livereload',
+            // 'configureProxies',            
             'open:server',
             'watch'
         ]);
