@@ -9,6 +9,12 @@ This is simple grunt file, universal almost for every app. This will provide you
 * Place files from this repository to your project folder. You may need to wrap all your project in folder "app" ( create if you don't have one yet ) .
 * Open a terminal in folder where Gruntfile.js is placed and run 
 ```javascript
+	$ npm install grunt 
+``` 
+
+and then
+
+```javascript
 	$ npm install
 ```	
 * Run "grunt serve" in termainal
